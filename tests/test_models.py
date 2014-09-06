@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from appname import create_app
 from appname.models import db, User
-
+from flask.ext.bcrypt import check_password_hash
 
 class TestModels:
     def setup(self):
@@ -19,7 +19,7 @@ class TestModels:
         admin = User('admin', 'supersafepassword')
 
         assert admin.username == 'admin'
-        assert admin.password == 'supersafepassword'
+        assert check_password_hash(admin.password, 'supersafepassword')
 
         db.session.add(admin)
         db.session.commit()

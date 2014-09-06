@@ -27,3 +27,8 @@ lint:
 
 test:
 	py.test tests
+
+rename:
+	echo "renaming appname to $(appname)"
+	find . -type f | grep -v '/env/' | xargs replace appname $(appname)
+	mv appname $(appname)
