@@ -15,7 +15,7 @@ class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../database.db'
     SQLALCHEMY_ECHO = True
 
-    CACHE_TYPE = 'null'
+    CACHE_TYPE = 'simple'
 
     # This allows us to test the forms from WTForm
     WTF_CSRF_ENABLED = False
