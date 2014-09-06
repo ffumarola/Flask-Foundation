@@ -18,13 +18,10 @@ def home():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # For demonstration purposes the password in stored insecurely
-        user = User.query.filter_by(username=form.username.data,
-                                    password=form.password.data).first()
-
+        user = User.authenticate(username=form.username.data,
+                                 password=form.password.data)
         if user:
             login_user(user)
-
             flash("Logged in successfully.", "success")
             return redirect(request.args.get("next") or url_for(".home"))
         else:
@@ -37,7 +34,6 @@ def login():
 def logout():
     logout_user()
     flash("You have been logged out.", "success")
-
     return redirect(url_for(".home"))
 
 
