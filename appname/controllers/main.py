@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for
-from flask.ext.login import login_user, logout_user, login_required
+from flask.ext.login import login_user, logout_user, login_required, current_user
 
 from appname import cache
 from appname.forms import LoginForm
@@ -40,4 +40,4 @@ def logout():
 @main.route("/restricted")
 @login_required
 def restricted():
-    return "You can only see this if you are logged in!", 200
+    return "You, {}, can only see this if you are logged in!".format(current_user.username), 200
