@@ -4,7 +4,7 @@ from flask.ext.bcrypt import check_password_hash, generate_password_hash
 
 class User(db.Model, ActiveModel, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
+    username = db.Column(db.String, unique=True)
     password = db.Column(db.String)
 
     def __init__(self, username, password):

@@ -4,6 +4,7 @@ A Fork of the original Flask-Foundation, but with the following enhancements:
 * Login using bcrpyted passwords
 * Forms and Models moved into modules
 * An ActiveModel Mixing added for db opertations (ex. User.save())
+* Account creation example
 
 Documentation is located at [https://jackstouffer.github.io/Flask-Foundation/](https://jackstouffer.github.io/Flask-Foundation/)
 
