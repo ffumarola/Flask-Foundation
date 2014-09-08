@@ -1,3 +1,3 @@
 from .db import db
-from core import Base
+from core import SingularModel
 from user import User

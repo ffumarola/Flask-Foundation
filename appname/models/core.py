@@ -1,8 +1,8 @@
 from datetime import datetime
 from .db import db
 
-# Define Base model that other models can extend
-class Base(db.Model):
+# Define a base model for singular models that can be extended
+class SingularModel(db.Model):
     __abstract__ = True
 
     # All tables will have primary key ID, date created, and date modified columns
