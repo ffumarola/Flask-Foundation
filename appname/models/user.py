@@ -1,9 +1,9 @@
 from .db import db, ActiveModel
-from .core import Base
+from .core import SingularModel
 from flask.ext.login import UserMixin, AnonymousUserMixin
 from flask.ext.bcrypt import check_password_hash, generate_password_hash
 
-class User(Base, ActiveModel, UserMixin):
+class User(SingularModel, ActiveModel, UserMixin):
     username = db.Column(db.String, unique=True)
     password = db.Column(db.String)
 
