@@ -32,27 +32,43 @@ def create_app(object_name, env="prod"):
     app.config.from_object(object_name)
     app.config['ENV'] = env
 
-    #init the cache
+    register_extensions(app)
+    register_blueprints(app)
+    register_errorhandlers(app)
+    
+    return app
+
+
+def register_extensions(app):
+    # init the cache
     cache.init_app(app)
-
+    # init debug toolbar
     debug_toolbar.init_app(app)
-
-    #init SQLAlchemy
+    # init SQLAlchemy
     db.init_app(app)
-
+    # init login manager
     login_manager.init_app(app)
-
     # Import and register the different asset bundles
     assets_env.init_app(app)
     assets_loader = PythonAssetsLoader(assets)
     for name, bundle in assets_loader.load_bundles().iteritems():
         assets_env.register(name, bundle)
 
+
+def register_blueprints(app):
     # register our blueprints
     from controllers.main import main
     app.register_blueprint(main)
 
-    return app
+
+def register_errorhandlers(app):
+    def render_error(error):
+        # If a HTTPException, pull the `code` attribute; default to 500
+        error_code = getattr(error, 'code', 500)
+        return render_template("errors/{0}.html".format(error_code)), error_code
+    for errcode in [401, 404, 500]:
+        app.errorhandler(errcode)(render_error)
+
 
 if __name__ == '__main__':
     # Import the config for the proper environment using the
